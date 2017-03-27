@@ -4,24 +4,30 @@ using UnityEngine;
 
 public class RotateCube : MonoBehaviour {
 
-    protected bool rotate = false;
+    protected bool rotateX = false;
+    protected bool rotateY = false;
+    protected bool rotateZ = false;
 
-    public void CubeRotate()
+    public Renderer rend;
+
+    void Start()
     {
-        rotate = !rotate;
+        rend = GetComponent<Renderer>();
     }
+
+    public void CubeRotate(string axis)
+    {
+        if (axis == "x") { rotateX = !rotateX; rotateY = false; rotateZ = false; }
+        else if (axis == "y") { rotateY = !rotateY; rotateX = false; rotateZ = false; }
+        else if (axis == "z") { rotateZ = !rotateZ; rotateY = false; rotateX = false; }
+
+        }
 
     public void Update()
     {
-        
-        if (rotate)
-        {
-            transform.Rotate(new Vector3(150, 300, 60) * Time.deltaTime);
-        }
+        if (rotateX) { transform.Rotate(new Vector3(0, 50, 50) * Time.deltaTime); Debug.Log("X axis"); rend.material.color = Color.blue; }
+        else if (rotateY) { transform.Rotate(new Vector3(50, 0, 50) * Time.deltaTime); Debug.Log("Y axis"); rend.material.color = Color.red; }
+        else if (rotateZ) { transform.Rotate(new Vector3(50, 50, 0) * Time.deltaTime); Debug.Log("Z axis"); rend.material.color = Color.yellow; }
+        else { transform.Rotate(new Vector3(0, 0, 0) * Time.deltaTime); rend.material.color = Color.black; }
     }   
-
-    // Update is called once per frame
-    /*void Update () {
-        transform.Rotate(new Vector3(0, 0, 20) * Time.deltaTime);
-	}*/
 }
