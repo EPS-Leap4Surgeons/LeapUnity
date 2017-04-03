@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public enum LiverPart
 {
@@ -95,6 +93,10 @@ public class LiverFunctions : MonoBehaviour {
             yValue = (int)newValue;
             xValue = (int)newValue;
         }
+    }
+    public void rotateXYZ(float x, float y, float z)
+    {
+        transform.Rotate(new Vector3(x, y, z) * Time.deltaTime);
     }
 
     public void Update()
