@@ -21,6 +21,8 @@ public class LiverFunctions : MonoBehaviour {
     private int xValue = 50;
     private int yValue = 50;
     private int zValue = 50;
+    private int tempValue = 10;
+    private int tempDifference;
 
     float newValue;
 
@@ -78,20 +80,29 @@ public class LiverFunctions : MonoBehaviour {
     public void Slider_changed (float newValue)
     {
         Debug.Log("slider:" + rotateX);
-        
-        if (rotateX) { Debug.Log("in x:" + newValue); yValue = yValue +  (int)newValue; zValue = zValue + (int)newValue; Debug.Log("in x:" + yValue); }
-        else if (rotateY) { xValue = xValue - 20 *  (int)newValue; zValue = zValue - 20 *  (int)newValue; }
-        else if (rotateZ) { yValue = yValue - 20 *  (int)newValue; xValue = xValue - 20 *  (int)newValue; }
-
+        if (rotateX)
+        {
+            yValue = (int)newValue;
+            zValue = (int)newValue;
+        }
+        else if (rotateY)
+        {
+            xValue = (int)newValue;
+            zValue = (int)newValue;
+        }
+        else if (rotateZ)
+        {
+            yValue = (int)newValue;
+            xValue = (int)newValue;
+        }
     }
 
     public void Update()
     {
-        Debug.Log("update:" + rotateX);
-        if (rotateX) { transform.Rotate(new Vector3(0, yValue, zValue) * Time.deltaTime); Debug.Log("X axis"); }// rend.material.color = Color.blue; }
-        else if (rotateY) { transform.Rotate(new Vector3(xValue, 0, zValue) * Time.deltaTime); Debug.Log("Y axis"); }// rend.material.color = Color.red; }
-        else if (rotateZ) { transform.Rotate(new Vector3(xValue, yValue, 0) * Time.deltaTime); Debug.Log("Z axis"); }//rend.material.color = Color.yellow; }
-        else { transform.Rotate(new Vector3(0, 0, 0) * Time.deltaTime); }// rend.material.color = Color.black; }
+        if (rotateX) { transform.Rotate(new Vector3(0, yValue, zValue) * Time.deltaTime); Debug.Log("X axis"); Debug.Log("yValue:" + yValue); Debug.Log("zValue:" + zValue); }
+        else if (rotateY) { transform.Rotate(new Vector3(xValue, 0, zValue) * Time.deltaTime); Debug.Log("Y axis"); }
+        else if (rotateZ) { transform.Rotate(new Vector3(xValue, yValue, 0) * Time.deltaTime); Debug.Log("Z axis"); }
+        else { transform.Rotate(new Vector3(0, 0, 0) * Time.deltaTime); }
 
         
     }   
