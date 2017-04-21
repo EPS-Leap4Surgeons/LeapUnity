@@ -25,22 +25,16 @@ public class ShowModels : MonoBehaviour {
 
     public void Show_Hepatic(bool hepatic)
     {
-        
-        if (hepatic)
-            script.ShowModels("hepatic");
+        bool isActive = script.SwitchVisibility(LiverPart.Hepatic);
     }
 
     public void Show_Portal(bool portal)
     {
-        
-        if (portal)
-            script.ShowModels("portal");
+        bool isActive = script.SwitchVisibility(LiverPart.Portal);
     }
 
     public void Show_Tumor(bool tumor)
     {
-        
-        if (tumor)
-            script.ShowModels("tumor");
+        bool isActive = script.SwitchVisibility(LiverPart.Tumor);
     }
 }
