@@ -1,12 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class ButtonRotate : MonoBehaviour
-{
-    public Button button;
-    string x,y,z;
+public class Slider_script : MonoBehaviour {
+
     LiverFunctions script;
 
     public void Start()
@@ -20,24 +17,9 @@ public class ButtonRotate : MonoBehaviour
         script = (LiverFunctions)liver.GetComponent(typeof(LiverFunctions));
     }
 
-    public void RotateX()
+    public void Sliding(float newValue)
     {
-        x = "x";;
-        script.LiverRotate(x);
-    }
+        script.Slider_changed(newValue);
 
-    public void RotateY()
-    {
-        y = "y";
-        script.LiverRotate(y);
-    }
-
-    public void RotateZ()
-    {
-        z = "z";
-        script.LiverRotate(z);
     }
 }
-
-
-
