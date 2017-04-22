@@ -19,8 +19,12 @@ public class LiverFunctions : MonoBehaviour {
     private int xValue = 50;
     private int yValue = 50;
     private int zValue = 50;
-    private int tempValue = 10;
-    private int tempDifference;
+
+    GameObject liver;
+    GameObject Hepatic;
+    GameObject Parenchy;
+    GameObject Portal;
+    GameObject Tumor;
 
     float newValue;
 
@@ -29,7 +33,11 @@ public class LiverFunctions : MonoBehaviour {
     void Start()
     {
         rend = GetComponent<Renderer>();
-
+        liver = GameObject.FindGameObjectWithTag("Liver1");
+        Hepatic = GameObject.FindGameObjectWithTag("HepaticModel");  
+        Parenchy = GameObject.FindGameObjectWithTag("ParenchyModel");
+        Portal = GameObject.FindGameObjectWithTag("PortalModel");
+        Tumor = GameObject.FindGameObjectWithTag("TumorModel");
     }
 
     private GameObject GetGameObject( LiverPart part )
@@ -37,15 +45,15 @@ public class LiverFunctions : MonoBehaviour {
         switch( part )
         {
             case LiverPart.Hepatic:
-                return GameObject.FindGameObjectWithTag("HepaticModel");
+                return Hepatic;
             case LiverPart.Parenchy:
-                return GameObject.FindGameObjectWithTag("ParenchyModel");
+                return Parenchy;
             case LiverPart.Portal:
-                return GameObject.FindGameObjectWithTag("PortalModel");
+                return Portal;
             case LiverPart.Tumor:
-                return GameObject.FindGameObjectWithTag("TumorModel");
+                return Tumor;
         }
-        return GameObject.FindGameObjectWithTag("TumorModel");
+        return Tumor;
     }
 
     public bool SwitchVisibility( LiverPart part)
@@ -65,13 +73,6 @@ public class LiverFunctions : MonoBehaviour {
         if (axis == "x") { rotateX = !rotateX; rotateY = false; rotateZ = false; }
         else if (axis == "y") { rotateY = !rotateY; rotateX = false; rotateZ = false; }
         else if (axis == "z") { rotateZ = !rotateZ; rotateY = false; rotateX = false; }
-
-    }
-
-    public void ShowModels (string model)
-    {
-        if (model == "panerchy") GameObject.FindGameObjectWithTag("ParenchyModel").SetActive(true);
-        else if (model == "notPanerchy") GameObject.FindGameObjectWithTag("ParenchyModel").SetActive(false);
 
     }
 
@@ -104,8 +105,6 @@ public class LiverFunctions : MonoBehaviour {
         if (rotateX) { transform.Rotate(new Vector3(0, yValue, zValue) * Time.deltaTime); Debug.Log("X axis"); Debug.Log("yValue:" + yValue); Debug.Log("zValue:" + zValue); }
         else if (rotateY) { transform.Rotate(new Vector3(xValue, 0, zValue) * Time.deltaTime); Debug.Log("Y axis"); }
         else if (rotateZ) { transform.Rotate(new Vector3(xValue, yValue, 0) * Time.deltaTime); Debug.Log("Z axis"); }
-        else { transform.Rotate(new Vector3(0, 0, 0) * Time.deltaTime); }
-
-        
+        else { transform.Rotate(new Vector3(0, 0, 0) * Time.deltaTime); }  
     }   
 }
