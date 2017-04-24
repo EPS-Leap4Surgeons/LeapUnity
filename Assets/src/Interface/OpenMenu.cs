@@ -4,20 +4,38 @@ using UnityEngine;
 
 public class OpenMenu : MonoBehaviour {
 
-    GameObject CanvasUI;
-    GameObject CanvasLiver;
+    GameObject PanelSlider;
+    GameObject PanelShowModel;
+    GameObject PanelMainMenu;
+    GameObject PanelLockAxis;
 
     // Use this for initialization
     void Start () {
-        CanvasUI = GameObject.FindGameObjectWithTag("CanvasUI");
-        CanvasLiver = GameObject.FindGameObjectWithTag("CanvasLiver");
-        CanvasUI.SetActive(false);
+        PanelShowModel = GameObject.FindGameObjectWithTag("PanelShowModel");
+        PanelSlider = GameObject.FindGameObjectWithTag("PanelSlider");
+        PanelMainMenu = GameObject.FindGameObjectWithTag("PanelMainMenu");
+        PanelLockAxis = GameObject.FindGameObjectWithTag("PanelLockAxis");
+        
     }
 	
-	public void openCanvas ()
+	public void openPanelShowmodel ()
     {
-        bool isActive = CanvasUI.activeSelf;
-        CanvasUI.SetActive(!isActive);
-        CanvasLiver.SetActive(isActive);
+        bool isActive = PanelMainMenu.activeSelf;
+        PanelMainMenu.SetActive(!isActive);
+        PanelShowModel.SetActive(isActive);
+    }
+
+    public void openPanelSlider()
+    {
+        bool isActive = PanelMainMenu.activeSelf;
+        PanelMainMenu.SetActive(!isActive);
+        PanelSlider.SetActive(isActive);
+    }
+
+    public void openPanelLockAxis()
+    {
+        bool isActive = PanelMainMenu.activeSelf;
+        PanelMainMenu.SetActive(!isActive);
+        PanelLockAxis.SetActive(isActive);
     }
 }
