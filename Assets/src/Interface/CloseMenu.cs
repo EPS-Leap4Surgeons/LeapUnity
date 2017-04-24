@@ -16,9 +16,7 @@ public class CloseMenu : MonoBehaviour {
         PanelSlider = GameObject.FindGameObjectWithTag("PanelSlider");
         PanelMainMenu = GameObject.FindGameObjectWithTag("PanelMainMenu");
         PanelLockAxis = GameObject.FindGameObjectWithTag("PanelLockAxis");
-        PanelLockAxis.SetActive(false);
-        PanelSlider.SetActive(false);
-        PanelShowModel.SetActive(false);
+        
     }
 
     public void closePanels()

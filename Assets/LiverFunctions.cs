@@ -38,6 +38,9 @@ public class LiverFunctions : MonoBehaviour {
         Parenchy = GameObject.FindGameObjectWithTag("ParenchyModel");
         Portal = GameObject.FindGameObjectWithTag("PortalModel");
         Tumor = GameObject.FindGameObjectWithTag("TumorModel");
+
+        Transform liverTransform = liver.transform;
+        Debug.Log(liverTransform.position.x);
     }
 
     private GameObject GetGameObject( LiverPart part )
@@ -106,7 +109,5 @@ public class LiverFunctions : MonoBehaviour {
         else if (rotateY) { transform.Rotate(new Vector3(xValue, 0, zValue) * Time.deltaTime); }
         else if (rotateZ) { transform.Rotate(new Vector3(xValue, yValue, 0) * Time.deltaTime); }
         else { transform.Rotate(new Vector3(0, 0, 0) * Time.deltaTime); }
-        Transform liverTransform = liver.transform;
-        Debug.Log(liverTransform.position.x);
     }   
 }
