@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
+using System;
 
 public class ShowModels : MonoBehaviour {
 
@@ -10,19 +12,23 @@ public class ShowModels : MonoBehaviour {
     public GameObject canvas;
     public GameObject button;
     public Text nameLabel;
-    float yPos = 75;
-    int i = 1;
+    float yPos = 110;
+    int i = 0;
+    GameObject liver;
+    double[,] bookmarkArray = new double[10, 7];
 
     public void Start()
     {
         getLiver();
+        button.GetComponent<Button>().onClick.AddListener(NewButton);
+
     }
 
     private void getLiver()
     {
         canvas = GameObject.FindGameObjectWithTag("PanelShowModel");
         button = GameObject.FindGameObjectWithTag("btnBookmark");
-        var liver = GameObject.FindGameObjectWithTag("Liver1");
+        liver = GameObject.FindGameObjectWithTag("Liver1");       
         script = (LiverFunctions)liver.GetComponent(typeof(LiverFunctions));
     }
 
@@ -48,43 +54,50 @@ public class ShowModels : MonoBehaviour {
 
     public void NewButton ()
     {
-        GameObject newButton = Instantiate(button, canvas.transform, false);
-        yPos = yPos - 35;
-        newButton.transform.localPosition = new Vector3(230, yPos, 0);
         i++;
-        newButton.name = "btnBookmark" + i;
-        newButton.GetComponentInChildren<Text>().text = "Bookmark " + i;
 
-       
-        // newButton.GetComponent<Text>().text = "Hi";
+        if (i < 5)
+        {
+            GameObject newButton = Instantiate(button, canvas.transform, false);
+            newButton.GetComponent<Button>().onClick.RemoveAllListeners();
+            newButton.GetComponent<Button>().onClick.AddListener(bookmark_position);
+            newButton.name = "btnBookmark" + i;
+            newButton.GetComponentInChildren<Text>().text = "Bookmark " + i;
 
-
-
-        /*SampleButton sampleButton = newButton.GetComponent<SampleButton>();
-        sampleButton.Setup("bookmark2");*/
+            yPos = yPos - 35;
+            newButton.transform.localPosition = new Vector3(230, yPos, 0);
+            bookmarkArray[i - 1, 0] = i; 
+        }     
     }
 
-    private class SampleButton : MonoBehaviour
+    public void bookmark_position ()
     {
-        public Button buttonComponent;
-        public Text nameLabel;
-        public Image iconImage;
-        public Text priceText;
+        string tempName = EventSystem.current.currentSelectedGameObject.name;
+        int buttonNumber = Convert.ToInt32(tempName[tempName.Length - 1]) - 48;
 
-        // Use this for initialization
-        void Start()
-        {
-            buttonComponent.onClick.AddListener(HandleClick);
-        }
-
-        public void Setup(string text)
-        {
-            nameLabel.text = text;
-        }
-        public void HandleClick()
-        {
-            //scrollList.TryTransferItemToOtherShop(item);
-        }
+        for (int o = 0; o < bookmarkArray.GetLength(0); o++)
+        {            
+            if (buttonNumber == bookmarkArray[o, 0])
+            {
+                if (bookmarkArray[o, 1] == 0)
+                {
+                    Debug.Log("Set array");
+                    bookmarkArray[o, 1] = liver.transform.position.x;
+                    bookmarkArray[o, 2] = liver.transform.position.y;
+                    bookmarkArray[o, 3] = liver.transform.position.z;
+                    bookmarkArray[o, 4] = liver.transform.localEulerAngles.x;
+                    bookmarkArray[o, 5] = liver.transform.localEulerAngles.y;
+                    bookmarkArray[o, 6] = liver.transform.localEulerAngles.z;
+                }
+                else
+                {            
+                    Debug.Log("get Array");
+                    liver.transform.rotation = Quaternion.identity;
+                    liver.transform.position = new Vector3((float)bookmarkArray[o, 1], (float)bookmarkArray[o, 2], (float)bookmarkArray[o, 3]);
+                    liver.transform.Rotate(new Vector3((float)bookmarkArray[o, 4], (float)bookmarkArray[o, 5], (float)bookmarkArray[o, 6]));
+                }     
+            }
+        } 
 
     }
 }
