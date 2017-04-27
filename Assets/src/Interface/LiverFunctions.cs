@@ -100,7 +100,7 @@ public class LiverFunctions : MonoBehaviour {
     }
     public void rotateXYZ(float x, float y, float z)
     {
-        transform.Rotate(new Vector3(x, y, z) * Time.deltaTime);
+        transform.Rotate(new Vector3(x, y, z), Space.World);
     }
 
     public void Update()

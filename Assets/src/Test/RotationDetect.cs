@@ -44,12 +44,10 @@ public class RotationDetect : MonoBehaviour {
 
         int decimals = 4;
 
-        return Math.Round(rot.w, decimals).ToString() + " — " +
-            Math.Round(rot.x, decimals).ToString() + " — " +
-            Math.Round(rot.y, decimals).ToString() + " — " +
-            Math.Round(rot.z, decimals).ToString();
-
-        return rot.ToString();
+        return Math.Round(rot.w, decimals) + " — " +
+            Math.Round(rot.x, decimals) + " — " +
+            Math.Round(rot.y, decimals) + " — " +
+            Math.Round(rot.z, decimals);
     }
 
     public void TriggerGesture()
