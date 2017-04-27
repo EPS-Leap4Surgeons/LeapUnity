@@ -37,10 +37,7 @@ public class LiverFunctions : MonoBehaviour {
         Hepatic = GameObject.FindGameObjectWithTag("HepaticModel");  
         Parenchy = GameObject.FindGameObjectWithTag("ParenchyModel");
         Portal = GameObject.FindGameObjectWithTag("PortalModel");
-        Tumor = GameObject.FindGameObjectWithTag("TumorModel");
-
-        Transform liverTransform = liver.transform;
-        Debug.Log(liverTransform.position.x);
+        Tumor = GameObject.FindGameObjectWithTag("TumorModel");    
     }
 
     private GameObject GetGameObject( LiverPart part )

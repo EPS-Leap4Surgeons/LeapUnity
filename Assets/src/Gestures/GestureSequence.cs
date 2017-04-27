@@ -19,7 +19,7 @@ namespace Gestures
     {
         protected HandModel HandModel;
 
-        public GestureSeqState State { get; private set; }
+        public GestureSeqState State { get; protected set; }
 
         protected GestureSequence(HandModel handModel)
         {
