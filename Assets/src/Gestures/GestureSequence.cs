@@ -19,11 +19,18 @@ namespace Gestures
     {
         protected HandModel HandModel;
 
+        public GestureSeqState State { get; private set; }
+
         protected GestureSequence(HandModel handModel)
         {
             HandModel = handModel;
         }
 
+        /// <summary>
+        /// Updates this GestureSequence,
+        /// to be called every frame.
+        /// </summary>
+        /// <returns>Returns True when the internal state is Active.</returns>
         public abstract void Update();
     }
 }

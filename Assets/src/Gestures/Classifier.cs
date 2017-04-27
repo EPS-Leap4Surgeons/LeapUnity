@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Leap;
 using Leap.Unity;
@@ -8,6 +9,13 @@ using Leap.Unity;
 
 namespace Gestures
 {
+    /// <summary>
+    /// The classifier was originally supposed to manage
+    /// multiple gestures active in the same context.
+    /// Instead, its functionality was changed to act
+    /// more as a general gesture switcher and generic
+    /// interface.
+    /// </summary>
     class Classifier : MonoBehaviour
     {
         private readonly List<GestureSequence> _gestures = new List<GestureSequence>();
@@ -17,8 +25,12 @@ namespace Gestures
 
         // Events for sequences
         [SerializeField]
-        private PinchRotate.RotateEvent _rotateEvent;
+        private RotateEvent _rotateEvent;
 
+        public bool IsActive
+        {
+            get { return _gestures.Any(g => g.State == GestureSeqState.Active); }
+        }
 
         // Use this for initialization
         private void Start()
