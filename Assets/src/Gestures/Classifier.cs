@@ -1,29 +1,50 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Leap;
+using Leap.Unity;
+// ReSharper disable UnusedMember.Local
+#pragma warning disable 649
 
 namespace Gestures
 {
-    public class Classifier : MonoBehaviour
+    /// <summary>
+    /// The classifier was originally supposed to manage
+    /// multiple gestures active in the same context.
+    /// Instead, its functionality was changed to act
+    /// more as a general gesture switcher and generic
+    /// interface.
+    /// </summary>
+    class Classifier : MonoBehaviour
     {
+        private readonly List<GestureSequence> _gestures = new List<GestureSequence>();
 
-        IController Controller;
+        [SerializeField]
+        private HandModel _handModel;
 
-        List<GestureSequence> Gestures = new List<GestureSequence>();
+        // Events for sequences
+        [SerializeField]
+        private RotateEvent _rotateEvent;
 
+        public bool IsActive
+        {
+            get { return _gestures.Any(g => g.State == GestureSeqState.Active); }
+        }
 
         // Use this for initialization
-        void Start()
+        private void Start()
         {
-            Gestures.Add(new PinchGestureSequence());
-
+            _gestures.Add(new PinchRotate(_handModel, _rotateEvent));
         }
 
         // Update is called once per frame
-        void Update()
+        private void Update()
         {
-
+            foreach (var gs in _gestures)
+            {
+                gs.Update();
+            }
         }
 
 
