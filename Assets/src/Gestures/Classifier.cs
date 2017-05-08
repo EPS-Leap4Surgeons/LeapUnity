@@ -20,12 +20,12 @@ namespace Gestures
     {
         private readonly List<GestureSequence> _gestures = new List<GestureSequence>();
 
-        [SerializeField]
-        private HandModel _handModel;
+        [SerializeField] private HandModel _handModel;
 
         // Events for sequences
-        [SerializeField]
-        private RotateEvent _rotateEvent;
+        [SerializeField] private RotateEvent _rotateEvent;
+        [SerializeField] private PanEvent _panEvent;
+
 
         public bool IsActive
         {
@@ -35,7 +35,7 @@ namespace Gestures
         // Use this for initialization
         private void Start()
         {
-            _gestures.Add(new PinchRotate(_handModel, _rotateEvent));
+            _gestures.Add(new PinchHoldRotate(_handModel, _rotateEvent));
         }
 
         // Update is called once per frame
