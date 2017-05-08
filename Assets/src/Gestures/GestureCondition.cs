@@ -41,7 +41,7 @@ namespace Gestures
             }
         }
 
-        protected abstract bool BehaveLikeOneShot { get; }
+        protected bool BehaveLikeOneShot { get; set; }
 
         protected GestureCondition(HandModel handModel)
         {
