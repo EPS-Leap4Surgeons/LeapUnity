@@ -4,22 +4,20 @@ using UnityEngine;
 
 public class Slider_script : MonoBehaviour {
 
-    LiverFunctions script;
+    float newValue2 = 25;
 
     public void Start()
     {
-        getLiver();
-    }
 
-    private void getLiver()
-    {
-        var liver = GameObject.FindGameObjectWithTag("Liver1");
-        script = (LiverFunctions)liver.GetComponent(typeof(LiverFunctions));
     }
 
     public void Sliding(float newValue)
     {
-        script.Slider_changed(newValue);
+        newValue2 = newValue / 10;
+    }
 
+    private void Update()
+    {
+        Camera.main.fieldOfView = newValue2;
     }
 }
