@@ -26,6 +26,7 @@ namespace Gestures
         [SerializeField] private RotateEvent _rotateEvent;
         [SerializeField] private PanEvent _panEvent;
 
+        bool _buttonClicked = false;
 
         public bool IsActive
         {
@@ -38,13 +39,23 @@ namespace Gestures
             _gestures.Add(new PinchHoldRotate(_handModel, _rotateEvent));
         }
 
+
         // Update is called once per frame
         private void Update()
         {
-            foreach (var gs in _gestures)
+            if (_buttonClicked)
             {
-                gs.Update();
-            }
+                foreach (var gs in _gestures)
+                {
+                    gs.Update();
+                }
+            }     
+        }
+
+        public void ActivatePinchGesture ()
+        {
+            if (_buttonClicked) _buttonClicked = false;
+            else _buttonClicked = true;
         }
 
 
