@@ -12,7 +12,7 @@ public class ShowModels : MonoBehaviour {
     public GameObject canvas;
     public GameObject button;
     public Text nameLabel;
-    float yPos = 110;
+    float yPos = 90;
     int i = 0;
     GameObject liver;
     double[,] bookmarkArray = new double[10, 7];
@@ -26,7 +26,7 @@ public class ShowModels : MonoBehaviour {
 
     private void getLiver()
     {
-        canvas = GameObject.FindGameObjectWithTag("PanelShowModel");
+        canvas = GameObject.FindGameObjectWithTag("PanelMainMenu");
         button = GameObject.FindGameObjectWithTag("btnBookmark");
         liver = GameObject.FindGameObjectWithTag("Liver1");       
         script = (LiverFunctions)liver.GetComponent(typeof(LiverFunctions));
@@ -51,10 +51,15 @@ public class ShowModels : MonoBehaviour {
     {
         bool isActive = script.SwitchVisibility(LiverPart.Tumor);
     }
+    public void Reset()
+    {
+        liver.transform.rotation = Quaternion.identity;
+    }
 
     public void NewButton ()
     {
         i++;
+        Debug.Log("in here");
 
         if (i < 5)
         {
@@ -65,8 +70,14 @@ public class ShowModels : MonoBehaviour {
             newButton.GetComponentInChildren<Text>().text = "Bookmark " + i;
 
             yPos = yPos - 35;
-            newButton.transform.localPosition = new Vector3(230, yPos, 0);
-            bookmarkArray[i - 1, 0] = i; 
+            newButton.transform.localPosition = new Vector3(200, yPos, 0);
+            bookmarkArray[i - 1, 0] = i;
+            bookmarkArray[i - 1, 1] = liver.transform.position.x;
+            bookmarkArray[i - 1, 2] = liver.transform.position.y;
+            bookmarkArray[i - 1, 3] = liver.transform.position.z;
+            bookmarkArray[i - 1, 4] = liver.transform.localEulerAngles.x;
+            bookmarkArray[i - 1, 5] = liver.transform.localEulerAngles.y;
+            bookmarkArray[i - 1, 6] = liver.transform.localEulerAngles.z;
         }     
     }
 
@@ -79,7 +90,7 @@ public class ShowModels : MonoBehaviour {
         {            
             if (buttonNumber == bookmarkArray[o, 0])
             {
-                if (bookmarkArray[o, 1] == 0)
+                /*if (bookmarkArray[o, 1] == 0)
                 {
                     Debug.Log("Set array");
                     bookmarkArray[o, 1] = liver.transform.position.x;
@@ -90,12 +101,12 @@ public class ShowModels : MonoBehaviour {
                     bookmarkArray[o, 6] = liver.transform.localEulerAngles.z;
                 }
                 else
-                {            
-                    Debug.Log("get Array");
-                    liver.transform.rotation = Quaternion.identity;
-                    liver.transform.position = new Vector3((float)bookmarkArray[o, 1], (float)bookmarkArray[o, 2], (float)bookmarkArray[o, 3]);
-                    liver.transform.Rotate(new Vector3((float)bookmarkArray[o, 4], (float)bookmarkArray[o, 5], (float)bookmarkArray[o, 6]));
-                }     
+                {   */         
+                Debug.Log("get Array");
+                liver.transform.rotation = Quaternion.identity;
+                liver.transform.position = new Vector3((float)bookmarkArray[o, 1], (float)bookmarkArray[o, 2], (float)bookmarkArray[o, 3]);
+                liver.transform.Rotate(new Vector3((float)bookmarkArray[o, 4], (float)bookmarkArray[o, 5], (float)bookmarkArray[o, 6]));
+                //}     
             }
         } 
 
