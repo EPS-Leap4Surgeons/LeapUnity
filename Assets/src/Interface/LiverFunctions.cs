@@ -102,6 +102,11 @@ public class LiverFunctions : MonoBehaviour {
         transform.Rotate(new Vector3(x, y, z), Space.World);
     }
 
+    public void panXYZ(float x, float y, float z)
+    {
+        transform.Translate(new Vector3(x,y,z), Space.World);
+    }
+
     public void Update()
     {
         if (rotateX) { transform.Rotate(new Vector3(0, yValue, zValue) * Time.deltaTime); }

@@ -17,7 +17,7 @@ namespace Gestures
     /// </summary>
     abstract class GestureSequence
     {
-        protected HandModel HandModel;
+        protected readonly HandModel HandModel;
 
         public GestureSeqState State { get; protected set; }
 

@@ -10,18 +10,20 @@ namespace Gestures
         private const float PINCH_DISTANCE = 20f;
         private const float DEBOUNCE_FACTOR = 2f;
         
-        // We set this to true, because we're only interested
-        // in one pinch trigger per "pinch gesture".
-        protected override bool BehaveLikeOneShot { get { return true; } }
-
-        public PinchCondition(HandModel handModel) : base(handModel) { }
+        public PinchCondition(HandModel handModel, bool oneShot = true)
+            : base(handModel)
+        {
+            BehaveLikeOneShot = oneShot;
+        }
 
         public override void Update()
         {
             var hand = HandModel.GetLeapHand();
             if (hand == null)
+            {
+                Triggered = false;
                 return;
-            
+            }
             if (hand.PinchDistance < PINCH_DISTANCE - DEBOUNCE_FACTOR)
             {
                 Triggered = true;

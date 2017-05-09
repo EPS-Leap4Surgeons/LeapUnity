@@ -11,7 +11,8 @@ namespace Gestures
         private readonly PinchCondition _pinch;
         private Vector3 _lastRot;
 
-        public PinchRotate( HandModel handModel, RotateEvent rotateEvent ) : base(handModel)
+        public PinchRotate( HandModel handModel, RotateEvent rotateEvent )
+            : base(handModel)
         {
             _rotateEvent = rotateEvent;
             _pinch = new PinchCondition(handModel);
