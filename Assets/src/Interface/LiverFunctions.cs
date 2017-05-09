@@ -95,6 +95,8 @@ public class LiverFunctions : MonoBehaviour {
             xValue = (int)newValue;
         }
     }
+
+     
     public void rotateXYZ(float x, float y, float z)
     {
         transform.Rotate(new Vector3(x, y, z), Space.World);

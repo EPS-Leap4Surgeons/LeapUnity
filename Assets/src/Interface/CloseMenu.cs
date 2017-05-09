@@ -4,27 +4,24 @@ using UnityEngine;
 
 public class CloseMenu : MonoBehaviour {
 
-    GameObject PanelSlider;
-    GameObject PanelShowModel;
+    GameObject PanelModel;
     GameObject PanelMainMenu;
-    GameObject PanelLockAxis;
 
     // Use this for initialization
     void Start()
     {
-        PanelShowModel = GameObject.FindGameObjectWithTag("PanelShowModel");
-        PanelSlider = GameObject.FindGameObjectWithTag("PanelSlider");
-        PanelMainMenu = GameObject.FindGameObjectWithTag("PanelMainMenu");
-        PanelLockAxis = GameObject.FindGameObjectWithTag("PanelLockAxis");
-        
+        PanelModel = GameObject.FindGameObjectWithTag("PanelModel");
+        PanelMainMenu = GameObject.FindGameObjectWithTag("PanelMainMenu");   
     }
 
     public void closePanels()
     {
-        bool isActive = PanelMainMenu.activeSelf;
-        PanelMainMenu.SetActive(!isActive);
-        PanelSlider.SetActive(isActive);
-        PanelShowModel.SetActive(isActive);
-        PanelLockAxis.SetActive(isActive);
+        //bool isActive = PanelMainMenu.activeSelf;
+        
+        PanelMainMenu.SetActive(false);
+        PanelModel.SetActive(true);
+        
+        Debug.Log(PanelModel.activeSelf);
+        Debug.Log("here");
     }
 }
