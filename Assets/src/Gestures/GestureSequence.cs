@@ -30,7 +30,7 @@ namespace Gestures
         /// Updates this GestureSequence,
         /// to be called every frame.
         /// </summary>
-        /// <returns>Returns True when the internal state is Active.</returns>
+        /// <returns>Returns <c>true</c> when the internal state is Active.</returns>
         public abstract void Update();
     }
 }

@@ -34,6 +34,7 @@ namespace Gestures
             {
                 State = GestureSeqState.Listening;
             }
+
         }
 
         private void ActiveUpdate()

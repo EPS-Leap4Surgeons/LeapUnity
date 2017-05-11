@@ -6,7 +6,7 @@ using System;
 using Leap;
 using System.Linq;
 
-[System.Obsolete("This class is only around for reference. Do not use.")]
+[System.Obsolete("This class is only around for reference. Do not use.", true)]
 public class RotationDetect : MonoBehaviour {
 
     private const int QUEUE_SAMPLES = 100;

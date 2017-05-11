@@ -5,6 +5,23 @@ using UnityEngine;
 
 namespace Gestures
 {
+    /// This is the first gesture we implemented.It operates as
+    /// follows:
+    ///    - Pinch once to activate.
+    ///    - Rotate your hand freely, the model rotates similarly.
+    ///    - Pinch again to deactivate.
+    /// The particular thing about this gesture is that you do not
+    /// need to keep pinching in order for it to stay activated.
+    /// You can pinch, relax your hand, rotate it, and pinch again
+    /// to deativate. This is mostly kept around to demonstrate
+    /// the possibility to use gestures this way.In order to do
+    /// this, you have to pass on 'oneShot: false' when creating
+    /// the PinchCondition, as you can see in the constructor here.
+    /// 
+    /// <summary>
+    /// Demo gesture, kept around for reference purposes.
+    /// </summary>
+    [System.Obsolete("This class is deprecated. Use as a reference ONLY.", true)]
     class PinchRotate : GestureSequence
     {
         private readonly RotateEvent _rotateEvent;
@@ -15,7 +32,7 @@ namespace Gestures
             : base(handModel)
         {
             _rotateEvent = rotateEvent;
-            _pinch = new PinchCondition(handModel);
+            _pinch = new PinchCondition(handModel, oneShot: false);
         }
 
         public override void Update()

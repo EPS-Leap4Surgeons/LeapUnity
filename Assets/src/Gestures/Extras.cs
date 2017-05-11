@@ -12,16 +12,46 @@ namespace Gestures
         Active
     }
 
+    /// <summary>
+    /// The available gesture-backed tools.
+    /// </summary>
+    public enum Tool
+    {
+        Rotation = 1,
+        Panning = 2,
+        Zooming = 3,
+        /// <summary>Not per se a tool, rather the absence of one.</summary>
+        Disabled = 0
+    }
+
+    /// <summary>
+    /// Function that calls the model's RotateXYZ function. Performs an
+    /// incremental rotation by respectively X, Y, and Z degrees.
+    /// </summary>
     [Serializable]
     public class RotateEvent : UnityEvent<float, float, float> { }
 
+    /// <summary>
+    /// Function that calls the model's TranslateXYZ function. Performs an
+    /// incremental movement by respectively X, Y, and Z units in their 
+    /// respective directions.
+    /// </summary>
     [Serializable]
     public class PanEvent : UnityEvent<float, float, float> { }
 
+    /// <summary>
+    /// A few extension methods (look it up) to reduce code clutter elsewhere.
+    /// </summary>
     static class Extensions
     {
+        /// <summary>
+        /// Shortcut to get the TipPosition of the index finger of this hand.
+        /// </summary>
+        /// <returns>The Vector3 representing the
+        /// position of the index finger's tip.</returns>
         internal static Vector3 GetIndexVector(this HandModel handModel)
         {
+            // To how many decimals after the comma the coordinates get rounded
             int ACCURACY = 4;
 
             var tip = handModel.GetLeapHand().Fingers
@@ -37,11 +67,27 @@ namespace Gestures
         }
     }
 
+    /// <summary>
+    /// Represents a spacial 3D position not in the Cartesian, but in the
+    /// Polar Coordinate system. This is a coordinate system that expresses
+    /// position in relative angles and as such is very useful in functions
+    /// that deal with rotations.
+    /// </summary>
     struct Polar3
     {
+        /// <summary>
+        /// The original Vector3 with Cartesian coordinates,
+        /// from which this Polar3 was constructed.
+        /// </summary>
         public readonly Vector3 OrigVec;
+        /// <summary>Distance to origin.</summary>
         public readonly double R;
+        /// <summary>
+        /// In the XZ-plane, angle between the point,
+        /// origin, and the positive X-axis.
+        /// </summary>
         public readonly double Phi;
+        /// <summary>Angle between the point, origin, and the positive Y-axis.</summary>
         public readonly double Theta;
 
         public Polar3(Vector3 origVec)
@@ -65,18 +111,33 @@ namespace Gestures
             OrigVec = new Vector3(float.NaN, float.NaN, float.NaN);
         }
 
+        // For now the only operator is the minus, because that's the only
+        // one we've needed for now.
         public static Polar3 operator -(Polar3 a, Polar3 b)
         {
             return new
                 Polar3(a.R - b.R, a.Phi - b.Phi, a.Theta - b.Theta);
         }
 
+        /// <summary>
+        /// Basic ToString method. Use the overloaded method for clearer output.
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
-            return ToString(2);
-            //return "{r=" + R + "; Phi=" + Phi + "; Theta=" + Theta;
+            return ToString(4, anglesDeg: false);
         }
 
+        /// <summary>
+        /// Enhanced ToString for debug purposes.
+        /// </summary>
+        /// <param name="decimals">To how many decimals output should be rounded.</param>
+        /// <param name="rMult">Factor by which R should be multiplied,
+        /// handy if it's consistently tenths or hundredths you're dealing with.</param>
+        /// <param name="anglesDeg">Show angles in degrees instead of radians.</param>
+        /// <param name="showOrig">Print the original Cartesian Vector3 from which
+        /// this Polar3 was created.</param>
+        /// <returns>A useful, formatted debug string.</returns>
         public string ToString(int decimals, int rMult = 1, bool anglesDeg = true, bool showOrig = false)
         {
             var r = Math.Round(R*rMult, decimals);
