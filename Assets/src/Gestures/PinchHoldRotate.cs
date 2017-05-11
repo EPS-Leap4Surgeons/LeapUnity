@@ -74,7 +74,7 @@ namespace Gestures
 
             Debug.Log("rp: " + rp.ToString(3,1000) + "   rrp: " + rrp.ToString(3,100));
 
-            var factor = 30;
+            var factor = 50;
             float theta = (float)rrp.Theta*factor;
             float phi = (float)rrp.Phi * factor;
             _rotateEvent.Invoke(-theta, -phi, 0);
