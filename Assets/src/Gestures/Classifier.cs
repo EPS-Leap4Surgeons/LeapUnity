@@ -60,7 +60,7 @@ namespace Gestures
                     newGesture = null;
                     break;
             }
-			if (_activeGestureSequence.GetType() == newGesture)
+			if (_activeGestureSequence != null && _activeGestureSequence.GetType() == newGesture)
 				newGesture = null;
 
             _activeGestureSequence = _gestures.Find(g => g.GetType() == newGesture);
@@ -69,7 +69,8 @@ namespace Gestures
         // Update is called once per frame
         private void Update()
         {
-            _activeGestureSequence.Update();  
+            if (_activeGestureSequence != null)
+                _activeGestureSequence.Update();  
         }
     }
 }

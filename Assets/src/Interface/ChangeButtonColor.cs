@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class ChangeButtonColor : MonoBehaviour {
 
-    GameObject gesture;
+    GameObject rotate;
     GameObject pan;
     GameObject zoom;
 
@@ -14,11 +14,11 @@ public class ChangeButtonColor : MonoBehaviour {
     Color colorZoom = Color.white;
     private void Start()
     {
-        gesture = GameObject.FindGameObjectWithTag("btnGesture");
+        rotate = GameObject.FindGameObjectWithTag("btnRotate");
         pan = GameObject.FindGameObjectWithTag("btnPan");
         zoom = GameObject.FindGameObjectWithTag("btnZoom");
     }
-    public void ChangeColorbtnGesture ()
+    public void ChangeColorbtnRotate ()
     {
         if (colorGesture == Color.green)
             colorGesture = Color.white;
@@ -59,8 +59,8 @@ public class ChangeButtonColor : MonoBehaviour {
 
     private void change()
     {
-        //zoom.GetComponent<Image>().color = colorZoom;
+        zoom.GetComponent<Image>().color = colorZoom;
         pan.GetComponent<Image>().color = colorPan;
-        gesture.GetComponent<Image>().color = colorGesture;
+        rotate.GetComponent<Image>().color = colorGesture;
     }
 }
