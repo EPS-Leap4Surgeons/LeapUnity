@@ -69,8 +69,8 @@ namespace Gestures
         // Update is called once per frame
         private void Update()
         {
-			if (_activeGestureSequence != null)
-	            _activeGestureSequence.Update();  
+            if (_activeGestureSequence != null)
+                _activeGestureSequence.Update();  
         }
     }
 }
