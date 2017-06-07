@@ -111,6 +111,7 @@ public class LiverFunctions : MonoBehaviour {
 	public void zoomR(float r)
 	{
 		Camera.main.fieldOfView += r;
+		Debug.Log(Camera.main.fieldOfView);
 	}
 
     public void Update()

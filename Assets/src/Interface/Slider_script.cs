@@ -18,6 +18,6 @@ public class Slider_script : MonoBehaviour {
 
     private void Update()
     {
-        Camera.main.fieldOfView = newValue2;
+        //Camera.main.fieldOfView = newValue2;
     }
 }

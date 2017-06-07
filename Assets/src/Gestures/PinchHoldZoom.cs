@@ -48,7 +48,7 @@ namespace Gestures
 			var rrp = rp - _lastRp;						// rrp = relative relative position
 			_lastRp = rp;
 
-			var factor = 0.5f;
+			var factor = -150f;
 			_zoomEvent.Invoke((float)rrp.R * factor);
 
 		}
