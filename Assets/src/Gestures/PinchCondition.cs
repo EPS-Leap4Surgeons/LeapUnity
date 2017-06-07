@@ -7,7 +7,7 @@ namespace Gestures
 {
     class PinchCondition : GestureCondition
     {
-        private const float PINCH_DISTANCE = 20f;
+        private const float PINCH_DISTANCE = 18f;
         private const float DEBOUNCE_FACTOR = 2f;
         
         public PinchCondition(HandModel handModel, bool oneShot = true)

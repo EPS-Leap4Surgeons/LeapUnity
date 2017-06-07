@@ -100,12 +100,18 @@ public class LiverFunctions : MonoBehaviour {
     public void rotateXYZ(float x, float y, float z)
     {
         transform.Rotate(new Vector3(x, y, z), Space.World);
+
     }
 
     public void panXYZ(float x, float y, float z)
     {
         transform.Translate(new Vector3(x,y,z), Space.World);
     }
+
+	public void zoomR(float r)
+	{
+		Camera.main.fieldOfView += r;
+	}
 
     public void Update()
     {

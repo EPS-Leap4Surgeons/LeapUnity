@@ -39,6 +39,9 @@ namespace Gestures
     [Serializable]
     public class PanEvent : UnityEvent<float, float, float> { }
 
+	[Serializable]
+	public class ZoomEvent : UnityEvent<float> { }
+
     /// <summary>
     /// A few extension methods (look it up) to reduce code clutter elsewhere.
     /// </summary>
@@ -58,7 +61,7 @@ namespace Gestures
                 .Find(f => f.Type == Finger.FingerType.TYPE_INDEX)
                 .TipPosition;
 
-            //uncomment to disable rounding
+            // uncomment to disable rounding
             //return tip.ToVector3();
 
             return new Vector3((float)Math.Round(tip.x, ACCURACY),
